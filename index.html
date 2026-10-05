@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Expense & Budget Visualizer</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <div>
+                <h1>Expense & Budget Visualizer</h1>
+                <p>Kelola budget dan catat pengeluaran bulananmu.</p>
+            </div>
+
+            <button id="themeToggle" class="theme-toggle" aria-label="Ubah tema">
+                🌙
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- MONTH -->
+        <section class="month-section">
+            <label for="month">Bulan</label>
+
+            <input
+                type="month"
+                id="month"
+                name="month"
+            >
+        </section>
+
+
+        <!-- BUDGET -->
+        <section class="budget-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">MONTHLY BUDGET</span>
+                    <h2>Budget Bulan Ini</h2>
+                </div>
+            </div>
+
+            <div class="budget-input">
+                <label for="budget">Total Budget</label>
+
+                <div class="input-money">
+                    <span>Rp</span>
+
+                    <input
+                        type="number"
+                        id="budget"
+                        placeholder="0"
+                        min="0"
+                    >
+                </div>
+
+                <button id="saveBudget" class="primary-button">
+                    Simpan Budget
+                </button>
+            </div>
+
+        </section>
+
+
+        <!-- SUMMARY -->
+        <section class="summary-section">
+
+            <div class="summary-item">
+                <span>Total Budget</span>
+                <strong id="totalBudget">Rp0</strong>
+            </div>
+
+            <div class="summary-item">
+                <span>Total Pengeluaran</span>
+                <strong id="totalExpense">Rp0</strong>
+            </div>
+
+            <div class="summary-item">
+                <span>Sisa Budget</span>
+                <strong id="remainingBudget">Rp0</strong>
+            </div>
+
+        </section>
+
+
+        <!-- BUDGET ALLOCATION -->
+        <section class="allocation-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">BUDGET PLAN</span>
+                    <h2>Alokasi Budget</h2>
+                </div>
+            </div>
+
+            <div class="allocation-form">
+
+                <div>
+                    <label for="categoryName">Kategori</label>
+
+                    <input
+                        type="text"
+                        id="categoryName"
+                        placeholder="Contoh: Makan"
+                    >
+                </div>
+
+                <div>
+                    <label for="categoryAmount">Nominal</label>
+
+                    <div class="input-money">
+                        <span>Rp</span>
+
+                        <input
+                            type="number"
+                            id="categoryAmount"
+                            placeholder="0"
+                            min="0"
+                        >
+                    </div>
+                </div>
+
+                <button id="addCategory" class="secondary-button">
+                    + Tambah Kategori
+                </button>
+
+            </div>
+
+
+            <div class="allocation-summary">
+
+                <div class="allocation-summary-item">
+                    <span>Total Dialokasikan</span>
+                    <strong id="totalAllocated">Rp0</strong>
+                </div>
+
+                <div class="allocation-summary-item">
+                    <span>Belum Dialokasikan</span>
+                    <strong id="unallocatedBudget">Rp0</strong>
+                </div>
+
+            </div>
+
+            <div id="allocationList" class="allocation-list">
+                <!-- Kategori akan muncul di sini -->
+            </div>
+
+        </section>
+
+
+        <!-- EXPENSE FORM -->
+        <section class="expense-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">EXPENSES</span>
+                    <h2>Tambah Pengeluaran</h2>
+                </div>
+            </div>
+
+            <form id="expenseForm" class="expense-form">
+
+                <div>
+                    <label for="expenseDate">Tanggal</label>
+
+                    <input
+                        type="date"
+                        id="expenseDate"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label for="expenseCategory">Kategori</label>
+
+                    <select id="expenseCategory" required>
+                        <option value="">Pilih kategori</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="expenseAmount">Nominal</label>
+
+                    <div class="input-money">
+                        <span>Rp</span>
+
+                        <input
+                            type="number"
+                            id="expenseAmount"
+                            placeholder="0"
+                            min="0"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div>
+                    <label for="expenseNote">Catatan</label>
+
+                    <input
+                        type="text"
+                        id="expenseNote"
+                        placeholder="Contoh: Makan siang"
+                    >
+                </div>
+
+                <button type="submit" class="primary-button">
+                    + Tambah Pengeluaran
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- CHARTS -->
+        <section class="charts-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">OVERVIEW</span>
+                    <h2>Visualisasi Pengeluaran</h2>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+
+                <div class="chart-container">
+                    <h3>Pengeluaran per Kategori</h3>
+
+                    <div class="chart-wrapper">
+                        <canvas id="expenseCategoryChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Budget vs Pengeluaran</h3>
+
+                    <div class="chart-wrapper">
+                        <canvas id="budgetComparisonChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXPENSE LIST -->
+        <section class="transaction-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">TRANSACTIONS</span>
+                    <h2>Riwayat Pengeluaran</h2>
+                </div>
+            </div>
+
+            <div id="expenseList" class="expense-list">
+                <p class="empty-state">
+                    Belum ada pengeluaran.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+        <p>Expense & Budget Visualizer</p>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+</html>
